@@ -21,6 +21,7 @@ const config: Config = {
       gridTemplateColumns:
       {
         '73/27': '73% 27%',
+        '60/40': '60% 40%'
       }
     },
   },

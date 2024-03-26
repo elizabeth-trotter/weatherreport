@@ -1,5 +1,3 @@
-
-
 export interface IWeatherData {
     "coord": {
         "lon": number,
@@ -47,6 +45,7 @@ export interface IWeatherData {
 
 export interface IOverview {
     "city": string,
+    "state": string,
     "currentIcon": any,
     "currentTemp": number,
     "description": string,
@@ -54,10 +53,13 @@ export interface IOverview {
     "todayLow": number
 }
 
-// export interface IIcon {
-//     "weather": [
-//         {
-//             "main": string,
-//         }
-//     ]
-// }
+export interface INav {
+    value: string,
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    onSearch: () => void,
+
+}
+
+export interface ILocationData {
+
+}
