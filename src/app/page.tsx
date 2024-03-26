@@ -6,6 +6,7 @@ import NavComponent from "./components/NavComponent";
 import { getCurrentWeather } from "./utils/DataService";
 import { IWeatherData } from "@/Interfaces/Interfaces";
 import { IconSwitch } from "./utils/IconSwitch";
+import TodayComponent from "./components/TodayComponent";
 
 
 export default function Home() {
@@ -39,10 +40,11 @@ export default function Home() {
   return (
     <main className='backgroundDay h-lvh'>
       <div className="grid grid-cols-73/27">
-        <div className='pt-16 ps-12'>
+        <div className='pt-16 px-12'>
           <h1 className='font-montserrat text-4xl font-bold pb-4'>U.S. Weather Report</h1>
           <p className='font-oswald font-light text-xl tracking-wide'>{date}<span className="tracking-widest"> | </span>{time}</p>
 
+          <div className="flex flex-col lg:flex-row gap-4">
           {
             weatherData && <OverviewComponent 
               city={weatherData.name} 
@@ -52,6 +54,10 @@ export default function Home() {
               todayHigh={Math.round(weatherData.main.temp_max)}
               todayLow={Math.round(weatherData.main.temp_min)}/>
           }
+
+          <TodayComponent />
+
+          </div>
         </div>
 
         <NavComponent />

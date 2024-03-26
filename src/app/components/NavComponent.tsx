@@ -2,7 +2,7 @@ import React from 'react'
 
 const NavComponent = () => {
     return (
-        <div className="border h-lvh">
+        <div className="bg-navyblue h-lvh">
             Favorites/ Nav
         </div>
     )
