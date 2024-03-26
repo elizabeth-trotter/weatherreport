@@ -1,3 +1,5 @@
+
+
 export interface IWeatherData {
     "coord": {
         "lon": number,
@@ -31,14 +33,31 @@ export interface IWeatherData {
     "clouds": {
         "all": number
     },
-    "dt": Date,
+    "dt": number,
     "sys": {
         "country": string,
-        "sunrise": Date,
-        "sunset": Date
+        "sunrise": number,
+        "sunset": number
     },
     "timezone": number,
     "id": number,
     "name": string,
     "cod": number
 }
+
+export interface IOverview {
+    "city": string,
+    "currentIcon": any,
+    "currentTemp": number,
+    "description": string,
+    "todayHigh": number,
+    "todayLow": number
+}
+
+// export interface IIcon {
+//     "weather": [
+//         {
+//             "main": string,
+//         }
+//     ]
+// }
