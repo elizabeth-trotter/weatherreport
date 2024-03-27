@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 
 const NavComponent = (props: INav) => {
-
+    
     return (
-        <div className="bg-navyblue h-lvh p-7">
+        <div className="bg-navyblue min-h-lvh p-7">
             <div className='flex justify-end'>
                 <img src="./logo.png" alt="weather logo" className='w-1/5' />
             </div>

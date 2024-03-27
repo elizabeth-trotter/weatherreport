@@ -62,6 +62,33 @@ export interface IToday {
     nightTemp: string,
 }
 
+export interface IFiveDay {
+    dateDayOne: string,
+    dayOneIcon: any,
+    dayOneHigh: string,
+    dayOneLow: string,
+
+    dateDayTwo: string,
+    dayTwoIcon: any,
+    dayTwoHigh: string,
+    dayTwoLow: string,
+
+    dateDayThree: string,
+    dayThreeIcon: any,
+    dayThreeHigh: string,
+    dayThreeLow: string,
+
+    dateDayFour: string,
+    dayFourIcon: any,
+    dayFourHigh: string,
+    dayFourLow: string,
+
+    dateDayFive: string,
+    dayFiveIcon: any,
+    dayFiveHigh: string,
+    dayFiveLow: string
+}
+
 export interface INav {
     value: string,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -150,7 +177,6 @@ export interface Wind {
     deg:   number;
     gust:  number;
 }
-
 
 
 

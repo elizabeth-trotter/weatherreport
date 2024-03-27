@@ -8,8 +8,8 @@ import { IOverview } from '@/Interfaces/Interfaces';
 
 
 const OverviewComponent = (props: IOverview) => {
-    return (
 
+    return (
         <div className='pt-20 ps-2 w-full lg:w-1/2'>
             <div className='bg-navyblue flex justify-between items-center rounded-t-md h-14 p-4'>
                 <h2 className='font-montserrat font-semibold text-2xl'>{props.city}, {props.state}</h2>
@@ -23,12 +23,14 @@ const OverviewComponent = (props: IOverview) => {
                 </div>
 
                 <div className='flex justify-between items-center pb-5 px-5'>
-                    <p className='font-montserrat font-regular'>{props.description}</p>
-                    <p className='font-oswald font-light text-lg tracking-wide'>H: {props.todayHigh} ° L: {props.todayLow} °</p>
+                    <p className='font-montserrat font-regular'>currently {props.description}</p>
+                    <div className='flex gap-2'>
+                        <p className='font-oswald font-light text-lg tracking-wide'>H: {props.todayHigh} °</p>
+                        <p className='font-oswald font-light text-lg tracking-wide'>L: {props.todayLow} °</p>
+                    </div>
                 </div>
             </div>
         </div>
-
     )
 }
 

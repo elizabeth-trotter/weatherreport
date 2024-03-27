@@ -9,7 +9,8 @@ import { IconSwitch } from "./utils/IconSwitch";
 import TodayComponent from "./components/TodayComponent";
 import { stateAb } from "./utils/StateConvert";
 import { getTodayForecast } from "./utils/HourlyFunction";
-import { faCloud, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faCloud, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import FiveDayComponent from "./components/FiveDayComponent";
 
 
 export default function Home() {
@@ -20,7 +21,7 @@ export default function Home() {
   const [citySearch, setCitySearch] = useState<string>('');
 
   const handleSearch = () => {
-    if(searchValue){
+    if (searchValue) {
       setCitySearch(searchValue);
       console.log('Search button clicked for: ' + searchValue);
     }
@@ -28,7 +29,7 @@ export default function Home() {
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      if(searchValue){
+      if (searchValue) {
         setCitySearch(searchValue);
       }
     }
@@ -112,7 +113,7 @@ export default function Home() {
         setMorningTemp(todayForecastArr[1]);
         setNoonIcon(IconSwitch(todayForecastArr[2]));
         setNoonTemp(todayForecastArr[3]);
-        setNightIcon(IconSwitch(todayForecastArr[4]));
+        setNightIcon(faMoon);
         setNightTemp(todayForecastArr[5]);
       }
     }
@@ -124,7 +125,7 @@ export default function Home() {
   // }, [weatherData, locationData, hourlyWeatherData]);
 
   return (
-    <main className='backgroundDay h-lvh'>
+    <main className='backgroundDay min-h-lvh'>
       <div className="grid md:grid-cols-60/40 lg:grid-cols-73/27">
         <div className='pt-16 px-12 pb-10'>
           <h1 className='font-montserrat text-4xl font-bold pb-4'>U.S. Weather Report</h1>
@@ -153,8 +154,39 @@ export default function Home() {
                 nightTemp={nightTemp}
               />
             }
-
           </div>
+
+          <div>
+            {
+              <FiveDayComponent 
+                dateDayOne={'Mon'}
+                dayOneIcon={faCloud}
+                dayOneHigh={''}
+                dayOneLow={''}
+
+                dateDayTwo={'Mon'}
+                dayTwoIcon={faSun}
+                dayTwoHigh={''}
+                dayTwoLow={''}
+
+                dateDayThree={'Mon'}
+                dayThreeIcon={faSun}
+                dayThreeHigh={''}
+                dayThreeLow={''}
+
+                dateDayFour={'Mon'}
+                dayFourIcon={faSun}
+                dayFourHigh={''}
+                dayFourLow={''}
+
+                dateDayFive={'Mon'}
+                dayFiveIcon={faSun}
+                dayFiveHigh={''}
+                dayFiveLow={''}
+              />
+            }
+          </div>
+
         </div>
 
         <NavComponent
@@ -163,7 +195,6 @@ export default function Home() {
           onSearch={handleSearch}
           onKeyDown={handleInputKeyDown}
         />
-
 
       </div>
     </main>
