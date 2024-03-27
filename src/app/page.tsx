@@ -3,10 +3,13 @@
 import { useEffect, useState } from "react";
 import OverviewComponent from "./components/OverviewComponent";
 import NavComponent from "./components/NavComponent";
-import { getCurrentWeather } from "./utils/DataService";
-import { ILocationData, IWeatherData } from "@/Interfaces/Interfaces";
+import { getCurrentWeather, getHourlyWeather, getLocationReverseGeo, getWeatherDirectGeo } from "./utils/DataService";
+import { IHourlyData, ILocationData, IWeatherData } from "@/Interfaces/Interfaces";
 import { IconSwitch } from "./utils/IconSwitch";
 import TodayComponent from "./components/TodayComponent";
+import { stateAb } from "./utils/StateConvert";
+import { getTodayForecast } from "./utils/HourlyFunction";
+import { faCloud, faSun } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function Home() {
@@ -25,15 +28,18 @@ export default function Home() {
   const [long, setLong] = useState<number>(-121.275604);
   const [units, setUnits] = useState<string>('imperial');
 
-  // Overview
-  // const [city, setCity] = useState<string>('Stockton, CA');
-  // const [currentTemp, setCurrentTemp] = useState<number>(61);
-  // const [description, setDescription] = useState<string>('currently cloudy');
-  // const [todayHigh, setTodayHigh] = useState<number>(69);
-  // const [todayLow, setTodayLow] = useState<number>(57);
   const [weatherData, setWeatherData] = useState<IWeatherData>();
   const [locationData, setLocationData] = useState<ILocationData>();
+  const [hourlyWeatherData, setHourlyWeatherData] = useState<IHourlyData>();
 
+  const [morningIcon, setMorningIcon] = useState<any>(faSun);
+  const [morningTemp, setMorningTemp] = useState<string>('');
+  const [noonIcon, setNoonIcon] = useState<any>(faCloud);
+  const [noonTemp, setNoonTemp] = useState<string>('');
+  const [nightIcon, setNightIcon] = useState<any>(faCloud);
+  const [nightTemp, setNightTemp] = useState<string>('');
+
+  // Date & Time
   useEffect(() => {
     const now = new Date();
     const currentDate = now.toLocaleDateString('en-US', { month: 'long', day: "numeric", year: "numeric" })
@@ -42,6 +48,7 @@ export default function Home() {
     setTime(currentTime);
   });
 
+  // User Location Request
   useEffect(() => {
     const success = (position: any) => {
       setLat(position.coords.latitude);
@@ -57,14 +64,50 @@ export default function Home() {
     navigator.geolocation.getCurrentPosition(success, errorFunc);
   }, []);
 
+  // User Search
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getWeatherDirectGeo(citySearch);
+      setLat(data[0].lat);
+      setLong(data[0].lon);
+    };
+    getData();
+  }, [citySearch]);
+
+  // Get Various Weather Data
   useEffect(() => {
     const getData = async () => {
       const data = await getCurrentWeather(lat, long, units)
-      // console.log(data);
       setWeatherData(data);
+      const locationData = await getLocationReverseGeo(lat, long);
+      setLocationData(locationData);
+      const hourlyData = await getHourlyWeather(lat, long, units);
+      setHourlyWeatherData(hourlyData);
     };
     getData();
   }, [lat, long, units]);
+
+  // Today Weather w/ Helper Functions
+  useEffect(() => {
+    if (weatherData && hourlyWeatherData) {
+      let todayUnix = weatherData.dt;
+      let todayDateTime = new Date(todayUnix * 1000);
+      let estimatedTodayBasedOnTmrw = new Date(todayDateTime.setHours(todayDateTime.getHours() + (24)));
+
+      let todayForecastArr = getTodayForecast(hourlyWeatherData, estimatedTodayBasedOnTmrw);
+      console.log('forcast array on page.tsx ' + todayForecastArr)
+      if (todayForecastArr) {
+        setMorningIcon(IconSwitch(todayForecastArr[0]));
+        setMorningTemp(todayForecastArr[1]);
+        setNoonIcon(IconSwitch(todayForecastArr[2]));
+        setNoonTemp(todayForecastArr[3]);
+        setNightIcon(IconSwitch(todayForecastArr[4]));
+        setNightTemp(todayForecastArr[5]);
+      }
+    }
+  }, [weatherData, locationData, hourlyWeatherData]);
+
+  // 5 Day Weather w/ Helper Functions
 
   return (
     <main className='backgroundDay h-lvh'>
@@ -75,17 +118,27 @@ export default function Home() {
 
           <div className="flex flex-col lg:flex-row gap-4">
             {
-              weatherData && <OverviewComponent
-                city={weatherData.name}
-                state="CA"
+              weatherData && locationData && <OverviewComponent
+                city={locationData[0].name}
+                state={locationData[0].state ? stateAb[locationData[0].state] : ''}
                 currentIcon={IconSwitch(weatherData.weather[0].main)}
                 currentTemp={Math.round(weatherData.main.temp)}
                 description={weatherData.weather[0].main.toLowerCase()}
                 todayHigh={Math.round(weatherData.main.temp_max)}
-                todayLow={Math.round(weatherData.main.temp_min)} />
+                todayLow={Math.round(weatherData.main.temp_min)}
+              />
             }
 
-            <TodayComponent />
+            {
+              weatherData && <TodayComponent
+                morningIcon={morningIcon}
+                morningTemp={morningTemp}
+                noonIcon={noonIcon}
+                noonTemp={noonTemp}
+                nightIcon={nightIcon}
+                nightTemp={nightTemp}
+              />
+            }
 
           </div>
         </div>

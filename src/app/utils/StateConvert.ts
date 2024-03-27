@@ -1,4 +1,6 @@
-export const stateConvert = {
+import { StateAbbreviations } from "@/Interfaces/Interfaces";
+
+export const stateAb: StateAbbreviations = {
     'Alabama': 'AL',
     'Alaska': 'AK',
     'American Samoa': 'AS',
