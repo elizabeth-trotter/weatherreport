@@ -66,7 +66,7 @@ export interface INav {
     value: string,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
     onSearch: () => void,
-
+    onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void; 
 }
 
 interface Location {

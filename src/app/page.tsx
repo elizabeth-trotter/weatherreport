@@ -20,8 +20,18 @@ export default function Home() {
   const [citySearch, setCitySearch] = useState<string>('');
 
   const handleSearch = () => {
-    setCitySearch(searchValue);
-    console.log('Search button clicked for: ' + searchValue);
+    if(searchValue){
+      setCitySearch(searchValue);
+      console.log('Search button clicked for: ' + searchValue);
+    }
+  };
+
+  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      if(searchValue){
+        setCitySearch(searchValue);
+      }
+    }
   };
 
   const [lat, setLat] = useState<number>(37.961632);
@@ -53,6 +63,7 @@ export default function Home() {
     const success = (position: any) => {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
+      console.log('user lcoation used' + lat);
     };
 
     const errorFunc = () => {
@@ -108,6 +119,9 @@ export default function Home() {
   }, [weatherData, locationData, hourlyWeatherData]);
 
   // 5 Day Weather w/ Helper Functions
+  // useEffect(() => {
+
+  // }, [weatherData, locationData, hourlyWeatherData]);
 
   return (
     <main className='backgroundDay h-lvh'>
@@ -146,7 +160,9 @@ export default function Home() {
         <NavComponent
           value={searchValue}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
-          onSearch={handleSearch} />
+          onSearch={handleSearch}
+          onKeyDown={handleInputKeyDown}
+        />
 
 
       </div>
