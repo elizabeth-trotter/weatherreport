@@ -71,7 +71,7 @@ function frequentCondition(arr: string[]) {
         }
     }
 
-    return el;
+    return el || '';
 }
 
 function pushDataToDay(data: IHourlyData, i: number, highArr: number[], lowArr: number[], weatherArr: string[]) {
@@ -83,7 +83,7 @@ function pushDataToDay(data: IHourlyData, i: number, highArr: number[], lowArr: 
 // API does not offer temperature highs and lows for future dates.
 // Code below gathers temperature data for each of the next five days respectively from the hourly forecast.
 // Max and min temperatures are determined for each day's available temps at various hours. 
-export function hourlyForecast(hourlyWeatherData: IHourlyData, ...futureDates: Date[]) {
+export function hourlyForecast(hourlyWeatherData: IHourlyData, futureDates: Date[]) {
     const highTemps: number[][] = [];
     const lowTemps: number[][] = [];
     const weatherIcons: string[][] = [];
@@ -109,23 +109,22 @@ export function hourlyForecast(hourlyWeatherData: IHourlyData, ...futureDates: D
         }
     }
 
-    // for (let i = 0; i < hourlyWeatherData.list.length; i++) {
-    //     const date = futureDates[i].toLocaleDateString('default');
+    const dayIcons = weatherIcons.map(arr => frequentCondition(arr));
+    const dayHighs = highTemps.map(arr => (Math.round(Math.max(...arr))).toString());
+    const dayLows = lowTemps.map(arr => (Math.round(Math.min(...arr))).toString());
 
-    //     for (const weather of hourlyWeatherData.list) {
-    //         const unixFutureTime = new Date(weather.dt * 1000).toLocaleDateString('default');
+    const flatArray = [...dayIcons, ...dayHighs, ...dayLows];
+    console.log(flatArray)
+    return flatArray;
+    // const flatArray: (string)[] = [];
 
-    //         if (unixFutureTime === date) {
-    //             pushDataToDay(hourlyWeatherData, i, highTemps[i], lowTemps[i], weatherIcons[i]);
-    //         }
-    //     }
+    // const maxLength = Math.max(dayIcons.length, dayHighs.length, dayLows.length);
+
+    // for (let i = 0; i < maxLength; i++) {
+    //     flatArray.push(dayIcons[i]);
+    //     flatArray.push(dayHighs[i]);
+    //     flatArray.push(dayLows[i]);
     // }
 
-    const dayIcons = weatherIcons.map(arr => frequentCondition(arr));
-    const dayHighs = highTemps.map(arr => Math.round(Math.max(...arr)));
-    const dayLows = lowTemps.map(arr => Math.round(Math.min(...arr)));
-
-    if (dayIcons.length && dayHighs.length && dayLows.length) {
-        return [dayIcons, dayHighs, dayLows];
-    }
+    // return flatArray;
 }

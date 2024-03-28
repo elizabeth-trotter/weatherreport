@@ -128,15 +128,22 @@ export default function Home() {
 
   // 5 Day Weather w/ Helper Functions
   useEffect(() => {
-    if(weatherData && hourlyWeatherData){
-      const [dayOne, dayTwo, dayThree, dayFour, dayFive] = getDates(weatherData);
-      setDateDayOne(formatDate(dayOne));
-      setDateDayTwo(formatDate(dayTwo));
-      setDateDayThree(formatDate(dayThree));
-      setDateDayFour(formatDate(dayFour));
-      setDateDayFive(formatDate(dayFive));
+    if (weatherData && hourlyWeatherData) {
+      const dateArray = getDates(weatherData);
+      const setDateSetter = [setDateDayOne, setDateDayTwo, setDateDayThree, setDateDayFour, setDateDayFive];
+      
+      const futureArr = hourlyForecast(hourlyWeatherData, dateArray);
+      const setIconSetter = [setDayOneIcon, setDayTwoIcon, setDayThreeIcon, setDayFourIcon, setDayFiveIcon];
+      const setHighSetter = [setDayOneHigh, setDayTwoHigh, setDayThreeHigh, setDayFourHigh, setDayFiveHigh];
+      const setLowSetter = [setDayOneLow, setDayTwoLow, setDayThreeLow, setDayFourLow, setDayFiveLow];
 
-      let hourlyForcastArr = hourlyForecast(hourlyWeatherData, dayOne, dayTwo, dayThree, dayFour, dayFive);
+      for (let i = 0; i < setDateSetter.length; i++) {
+          setDateSetter[i](formatDate(dateArray[i]));
+          setIconSetter[i](IconSwitch(futureArr[i]));
+          setHighSetter[i](futureArr[i + 5]);
+          setLowSetter[i](futureArr[i + 10]);
+      }
+
     }
   }, [weatherData, locationData, hourlyWeatherData]);
 
@@ -174,7 +181,7 @@ export default function Home() {
 
           <div>
             {
-              weatherData && <FiveDayComponent 
+              weatherData && <FiveDayComponent
                 dateDayOne={dateDayOne}
                 dayOneIcon={dayOneIcon}
                 dayOneHigh={dayOneHigh}
