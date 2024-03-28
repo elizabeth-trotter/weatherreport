@@ -12,9 +12,9 @@ const OverviewComponent = (props: IOverview) => {
     const [heartIcon, setHeartIcon] = useState<any>();
 
     const handleClickHeart = () => {
-        const favoritesArr = getFavoriteLocalStorage();
+        const favorites = getFavoriteLocalStorage();
 
-        if (favoritesArr.includes(`${props.city}, ${props.state}`)) {
+        if (favorites.includes(`${props.city}, ${props.state}`)) {
             removeFavoriteFromLocalStorage(`${props.city}, ${props.state}`);
             setHeartIcon(faHeart);
         } else {

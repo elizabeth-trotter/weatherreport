@@ -11,6 +11,7 @@ import { stateAb } from "./utils/StateConvert";
 import { formatDate, getDates, getTodayForecast, hourlyForecast } from "./utils/HourlyFunction";
 import { faCloud, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import FiveDayComponent from "./components/FiveDayComponent";
+import { getRecentLocalStorage, saveRecentToLocalStorage } from "./utils/LocalStorage";
 
 
 export default function Home() {
@@ -100,6 +101,12 @@ export default function Home() {
       setLong(data[0].lon);
     };
     getData();
+
+    const recents = getRecentLocalStorage();
+
+    if (locationData) {
+        saveRecentToLocalStorage(`${locationData[0].name}, ${locationData[0].state}`);
+    }
   }, [citySearch]);
 
   // Get Various Weather Data

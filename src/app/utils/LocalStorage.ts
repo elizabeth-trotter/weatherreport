@@ -33,11 +33,23 @@ const saveRecentToLocalStorage = (location: string) => {
 
     let recents = getRecentLocalStorage();
 
-    if(!recents.includes(location)){
-        recents.push(location);
+    if (recents.includes(location)) {
+        let indexDuplicate = recents.indexOf(location);
+        if (indexDuplicate !== 2) {
+            recents.splice(indexDuplicate, 1);
+            recents.push(location);
+            localStorage.setItem("Recents", JSON.stringify(recents));
+        }
+    } else {
+        if (recents.length > 2) {
+            recents.shift();
+            recents.push(location);
+            localStorage.setItem("Recents", JSON.stringify(recents));
+        } else {
+            recents.push(location);
+            localStorage.setItem("Recents", JSON.stringify(recents));
+        }
     }
-
-    localStorage.setItem("Recents", JSON.stringify(recents));
 };
 
 const getRecentLocalStorage = () => {
