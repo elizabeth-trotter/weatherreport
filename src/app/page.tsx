@@ -5,7 +5,7 @@ import OverviewComponent from "./components/OverviewComponent";
 import NavComponent from "./components/NavComponent";
 import { getCurrentWeather, getHourlyWeather, getLocationReverseGeo, getWeatherDirectGeo } from "./utils/DataService";
 import { IHourlyData, ILocationData, IWeatherData } from "@/Interfaces/Interfaces";
-import { IconSwitch } from "./utils/IconSwitch";
+import { IconSwitch, NightIconSwitch } from "./utils/IconSwitch";
 import TodayComponent from "./components/TodayComponent";
 import { stateAb } from "./utils/StateConvert";
 import { formatDate, getDates, getTodayForecast, hourlyForecast } from "./utils/HourlyFunction";
@@ -46,7 +46,7 @@ export default function Home() {
   // Today Component Props to Pass
   const [morningIcon, setMorningIcon] = useState<any>(faSun), [morningTemp, setMorningTemp] = useState<string>('');
   const [noonIcon, setNoonIcon] = useState<any>(faCloud), [noonTemp, setNoonTemp] = useState<string>('');
-  const [nightIcon, setNightIcon] = useState<any>(faCloud), [nightTemp, setNightTemp] = useState<string>('');
+  const [nightIcon, setNightIcon] = useState<any>(faMoon), [nightTemp, setNightTemp] = useState<string>('');
   // Five Day Component Props to Pass
   const [dateDayOne, setDateDayOne] = useState<string>(''), [dayOneIcon, setDayOneIcon] = useState<any>(faSun);
   const [dayOneHigh, setDayOneHigh] = useState<string>(''), [dayOneLow, setDayOneLow] = useState<string>('');
@@ -59,20 +59,20 @@ export default function Home() {
   const [dateDayFive, setDateDayFive] = useState<string>(''), [dayFiveIcon, setDayFiveIcon] = useState<any>(faSun);
   const [dayFiveHigh, setDayFiveHigh] = useState<string>(''), [dayFiveLow, setDayFiveLow] = useState<string>('');
 
-  // Date & Time
-  useEffect(() => {
-    const now = new Date();
-    const currentDate = now.toLocaleDateString('en-US', { month: 'long', day: "numeric", year: "numeric" })
-    const currentTime = now.toLocaleTimeString('en-US', { hour: "numeric", minute: "numeric", timeZoneName: "short" });
-    setDate(currentDate);
-    setTime(currentTime);
-  });
-
   // User Location Request
   useEffect(() => {
     const success = (position: any) => {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
+      const getData = async () => {
+        const data = await getCurrentWeather(lat, long, units)
+        setWeatherData(data);
+        const locationData = await getLocationReverseGeo(lat, long);
+        setLocationData(locationData);
+        const hourlyData = await getHourlyWeather(lat, long, units);
+        setHourlyWeatherData(hourlyData);
+      };
+      getData();
     };
 
     const errorFunc = () => {
@@ -82,6 +82,15 @@ export default function Home() {
 
     navigator.geolocation.getCurrentPosition(success, errorFunc);
   }, []);
+
+  // Date & Time
+  useEffect(() => {
+    const now = new Date();
+    const currentDate = now.toLocaleDateString('en-US', { month: 'long', day: "numeric", year: "numeric" })
+    const currentTime = now.toLocaleTimeString('en-US', { hour: "numeric", minute: "numeric", timeZoneName: "short" });
+    setDate(currentDate);
+    setTime(currentTime);
+  });
 
   // User Search
   useEffect(() => {
@@ -120,11 +129,11 @@ export default function Home() {
         setMorningTemp(todayForecastArr[1]);
         setNoonIcon(IconSwitch(todayForecastArr[2]));
         setNoonTemp(todayForecastArr[3]);
-        setNightIcon(faMoon); // Night always set to moon
+        setNightIcon(NightIconSwitch(todayForecastArr[4]));
         setNightTemp(todayForecastArr[5]);
       }
     }
-  }, [weatherData, locationData, hourlyWeatherData]);
+  }, [weatherData, hourlyWeatherData]);
 
   // 5 Day Weather w/ Helper Functions
   useEffect(() => {
@@ -145,7 +154,7 @@ export default function Home() {
       }
 
     }
-  }, [weatherData, locationData, hourlyWeatherData]);
+  }, [weatherData, hourlyWeatherData]);
 
   return (
     <main className='backgroundDay min-h-lvh'>
@@ -168,44 +177,22 @@ export default function Home() {
             }
 
             {
-              weatherData && <TodayComponent
-                morningIcon={morningIcon}
-                morningTemp={morningTemp}
-                noonIcon={noonIcon}
-                noonTemp={noonTemp}
-                nightIcon={nightIcon}
-                nightTemp={nightTemp}
+              weatherData && <TodayComponent 
+                morningIcon={morningIcon} morningTemp={morningTemp} 
+                noonIcon={noonIcon} noonTemp={noonTemp} 
+                nightIcon={nightIcon} nightTemp={nightTemp} 
               />
             }
           </div>
 
           <div>
             {
-              weatherData && <FiveDayComponent
-                dateDayOne={dateDayOne}
-                dayOneIcon={dayOneIcon}
-                dayOneHigh={dayOneHigh}
-                dayOneLow={dayOneLow}
-
-                dateDayTwo={dateDayTwo}
-                dayTwoIcon={dayTwoIcon}
-                dayTwoHigh={dayTwoHigh}
-                dayTwoLow={dayTwoLow}
-
-                dateDayThree={dateDayThree}
-                dayThreeIcon={dayThreeIcon}
-                dayThreeHigh={dayThreeHigh}
-                dayThreeLow={dayThreeLow}
-
-                dateDayFour={dateDayFour}
-                dayFourIcon={dayFourIcon}
-                dayFourHigh={dayFourHigh}
-                dayFourLow={dayFourLow}
-
-                dateDayFive={dateDayFive}
-                dayFiveIcon={dayFiveIcon}
-                dayFiveHigh={dayFiveHigh}
-                dayFiveLow={dayFiveLow}
+              weatherData && <FiveDayComponent 
+                dateDayOne={dateDayOne} dayOneIcon={dayOneIcon} dayOneHigh={dayOneHigh} dayOneLow={dayOneLow}
+                dateDayTwo={dateDayTwo} dayTwoIcon={dayTwoIcon} dayTwoHigh={dayTwoHigh} dayTwoLow={dayTwoLow}
+                dateDayThree={dateDayThree} dayThreeIcon={dayThreeIcon} dayThreeHigh={dayThreeHigh} dayThreeLow={dayThreeLow}
+                dateDayFour={dateDayFour} dayFourIcon={dayFourIcon} dayFourHigh={dayFourHigh} dayFourLow={dayFourLow}
+                dateDayFive={dateDayFive} dayFiveIcon={dayFiveIcon} dayFiveHigh={dayFiveHigh} dayFiveLow={dayFiveLow}
               />
             }
           </div>

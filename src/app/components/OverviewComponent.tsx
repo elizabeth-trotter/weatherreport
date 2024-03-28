@@ -1,19 +1,44 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState, useSyncExternalStore } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as faSolidHeart, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faSolidHeart, faMagnifyingGlass, faSun } from "@fortawesome/free-solid-svg-icons";
 import { IOverview } from '@/Interfaces/Interfaces';
+import { getFavoriteLocalStorage, removeFavoriteFromLocalStorage, saveFavoriteToLocalStorage } from '../utils/LocalStorage';
 
 
 const OverviewComponent = (props: IOverview) => {
+    const [heartIcon, setHeartIcon] = useState<any>();
+
+    const handleClickHeart = () => {
+        const favoritesArr = getFavoriteLocalStorage();
+
+        if (favoritesArr.includes(`${props.city}, ${props.state}`)) {
+            removeFavoriteFromLocalStorage(`${props.city}, ${props.state}`);
+            setHeartIcon(faHeart);
+        } else {
+            saveFavoriteToLocalStorage(`${props.city}, ${props.state}`);
+            setHeartIcon(faSolidHeart);
+        }
+    };
+
+    useEffect(() => {
+        const favorites = getFavoriteLocalStorage();
+        if (favorites.includes(`${props.city}, ${props.state}`)) {
+            setHeartIcon(faSolidHeart);
+        } else {
+            setHeartIcon(faHeart);
+        }
+    });
 
     return (
         <div className='pt-20 ps-2 w-full lg:w-1/2'>
             <div className='bg-navyblue flex justify-between items-center rounded-t-md h-14 p-4'>
                 <h2 className='font-montserrat font-semibold text-2xl'>{props.city}, {props.state}</h2>
-                <FontAwesomeIcon icon={faHeart} className='text-xl' />
+                <button onClick={handleClickHeart}>
+                    <FontAwesomeIcon icon={heartIcon} className='text-xl' />
+                </button>
             </div>
 
             <div className='bgTransparent rounded-b-md 2xl:py-4'>
