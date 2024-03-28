@@ -8,7 +8,7 @@ import { IHourlyData, ILocationData, IWeatherData } from "@/Interfaces/Interface
 import { IconSwitch } from "./utils/IconSwitch";
 import TodayComponent from "./components/TodayComponent";
 import { stateAb } from "./utils/StateConvert";
-import { getTodayForecast } from "./utils/HourlyFunction";
+import { formatDate, getDates, getTodayForecast, hourlyForecast } from "./utils/HourlyFunction";
 import { faCloud, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import FiveDayComponent from "./components/FiveDayComponent";
 
@@ -35,20 +35,29 @@ export default function Home() {
     }
   };
 
+  // Search Criteria - API Req. Inputs
   const [lat, setLat] = useState<number>(37.961632);
   const [long, setLong] = useState<number>(-121.275604);
   const [units, setUnits] = useState<string>('imperial');
-
+  // Data Fetched
   const [weatherData, setWeatherData] = useState<IWeatherData>();
   const [locationData, setLocationData] = useState<ILocationData>();
   const [hourlyWeatherData, setHourlyWeatherData] = useState<IHourlyData>();
-
-  const [morningIcon, setMorningIcon] = useState<any>(faSun);
-  const [morningTemp, setMorningTemp] = useState<string>('');
-  const [noonIcon, setNoonIcon] = useState<any>(faCloud);
-  const [noonTemp, setNoonTemp] = useState<string>('');
-  const [nightIcon, setNightIcon] = useState<any>(faCloud);
-  const [nightTemp, setNightTemp] = useState<string>('');
+  // Today Component Props to Pass
+  const [morningIcon, setMorningIcon] = useState<any>(faSun), [morningTemp, setMorningTemp] = useState<string>('');
+  const [noonIcon, setNoonIcon] = useState<any>(faCloud), [noonTemp, setNoonTemp] = useState<string>('');
+  const [nightIcon, setNightIcon] = useState<any>(faCloud), [nightTemp, setNightTemp] = useState<string>('');
+  // Five Day Component Props to Pass
+  const [dateDayOne, setDateDayOne] = useState<string>(''), [dayOneIcon, setDayOneIcon] = useState<any>(faSun);
+  const [dayOneHigh, setDayOneHigh] = useState<string>(''), [dayOneLow, setDayOneLow] = useState<string>('');
+  const [dateDayTwo, setDateDayTwo] = useState<string>(''), [dayTwoIcon, setDayTwoIcon] = useState<any>(faSun);
+  const [dayTwoHigh, setDayTwoHigh] = useState<string>(''), [dayTwoLow, setDayTwoLow] = useState<string>('');
+  const [dateDayThree, setDateDayThree] = useState<string>(''), [dayThreeIcon, setDayThreeIcon] = useState<any>(faSun);
+  const [dayThreeHigh, setDayThreeHigh] = useState<string>(''), [dayThreeLow, setDayThreeLow] = useState<string>('');
+  const [dateDayFour, setDateDayFour] = useState<string>(''), [dayFourIcon, setDayFourIcon] = useState<any>(faSun);
+  const [dayFourHigh, setDayFourHigh] = useState<string>(''), [dayFourLow, setDayFourLow] = useState<string>('');
+  const [dateDayFive, setDateDayFive] = useState<string>(''), [dayFiveIcon, setDayFiveIcon] = useState<any>(faSun);
+  const [dayFiveHigh, setDayFiveHigh] = useState<string>(''), [dayFiveLow, setDayFiveLow] = useState<string>('');
 
   // Date & Time
   useEffect(() => {
@@ -64,11 +73,9 @@ export default function Home() {
     const success = (position: any) => {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
-      console.log('user lcoation used' + lat);
     };
 
     const errorFunc = () => {
-      alert('Location NOT receieved.')
       setLat(37.961632);
       setLong(-121.275604);
     };
@@ -113,16 +120,25 @@ export default function Home() {
         setMorningTemp(todayForecastArr[1]);
         setNoonIcon(IconSwitch(todayForecastArr[2]));
         setNoonTemp(todayForecastArr[3]);
-        setNightIcon(faMoon);
+        setNightIcon(faMoon); // Night always set to moon
         setNightTemp(todayForecastArr[5]);
       }
     }
   }, [weatherData, locationData, hourlyWeatherData]);
 
   // 5 Day Weather w/ Helper Functions
-  // useEffect(() => {
+  useEffect(() => {
+    if(weatherData && hourlyWeatherData){
+      const [dayOne, dayTwo, dayThree, dayFour, dayFive] = getDates(weatherData);
+      setDateDayOne(formatDate(dayOne));
+      setDateDayTwo(formatDate(dayTwo));
+      setDateDayThree(formatDate(dayThree));
+      setDateDayFour(formatDate(dayFour));
+      setDateDayFive(formatDate(dayFive));
 
-  // }, [weatherData, locationData, hourlyWeatherData]);
+      let hourlyForcastArr = hourlyForecast(hourlyWeatherData, dayOne, dayTwo, dayThree, dayFour, dayFive);
+    }
+  }, [weatherData, locationData, hourlyWeatherData]);
 
   return (
     <main className='backgroundDay min-h-lvh'>
@@ -158,31 +174,31 @@ export default function Home() {
 
           <div>
             {
-              <FiveDayComponent 
-                dateDayOne={'Mon'}
-                dayOneIcon={faCloud}
-                dayOneHigh={''}
-                dayOneLow={''}
+              weatherData && <FiveDayComponent 
+                dateDayOne={dateDayOne}
+                dayOneIcon={dayOneIcon}
+                dayOneHigh={dayOneHigh}
+                dayOneLow={dayOneLow}
 
-                dateDayTwo={'Mon'}
-                dayTwoIcon={faSun}
-                dayTwoHigh={''}
-                dayTwoLow={''}
+                dateDayTwo={dateDayTwo}
+                dayTwoIcon={dayTwoIcon}
+                dayTwoHigh={dayTwoHigh}
+                dayTwoLow={dayTwoLow}
 
-                dateDayThree={'Mon'}
-                dayThreeIcon={faSun}
-                dayThreeHigh={''}
-                dayThreeLow={''}
+                dateDayThree={dateDayThree}
+                dayThreeIcon={dayThreeIcon}
+                dayThreeHigh={dayThreeHigh}
+                dayThreeLow={dayThreeLow}
 
-                dateDayFour={'Mon'}
-                dayFourIcon={faSun}
-                dayFourHigh={''}
-                dayFourLow={''}
+                dateDayFour={dateDayFour}
+                dayFourIcon={dayFourIcon}
+                dayFourHigh={dayFourHigh}
+                dayFourLow={dayFourLow}
 
-                dateDayFive={'Mon'}
-                dayFiveIcon={faSun}
-                dayFiveHigh={''}
-                dayFiveLow={''}
+                dateDayFive={dateDayFive}
+                dayFiveIcon={dayFiveIcon}
+                dayFiveHigh={dayFiveHigh}
+                dayFiveLow={dayFiveLow}
               />
             }
           </div>
