@@ -65,3 +65,7 @@
   background-color: #EDA169;
   color: #FFFFFF;
 } */
+
+.navHeaderColor {
+  color: rgba(255, 255, 255, 0.856);
+}

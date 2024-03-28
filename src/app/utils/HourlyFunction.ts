@@ -116,15 +116,4 @@ export function hourlyForecast(hourlyWeatherData: IHourlyData, futureDates: Date
     const flatArray = [...dayIcons, ...dayHighs, ...dayLows];
     console.log(flatArray)
     return flatArray;
-    // const flatArray: (string)[] = [];
-
-    // const maxLength = Math.max(dayIcons.length, dayHighs.length, dayLows.length);
-
-    // for (let i = 0; i < maxLength; i++) {
-    //     flatArray.push(dayIcons[i]);
-    //     flatArray.push(dayHighs[i]);
-    //     flatArray.push(dayLows[i]);
-    // }
-
-    // return flatArray;
 }
