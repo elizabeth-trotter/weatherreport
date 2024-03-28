@@ -13,7 +13,7 @@ const TodayComponent = (props: IToday) => {
           <h2 className='font-montserrat text-center font-semibold text-xl'>Today</h2>
         </div>
 
-        <div className='flex flex-row justify-around py-6'>
+        <div className='flex flex-row justify-around py-6 2xl:py-12'>
           <div className='flex flex-col justify-center items-center gap-10 pb-3'>
             <p className='font-oswald font-light text-lg'>Morning</p>
             <FontAwesomeIcon icon={props.morningIcon} className='text-4xl' />

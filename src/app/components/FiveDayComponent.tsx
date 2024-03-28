@@ -6,7 +6,7 @@ import React from 'react'
 const FiveDayComponent = (props: IFiveDay) => {
   return (
     <div className='pt-4 ps-2 w-full'>
-      <div className='bgTransparent rounded-md'>
+      <div className='bgTransparent rounded-md 2xl:py-5'>
         <div className='h-14 p-8'>
           <h2 className='font-montserrat text-center font-semibold text-2xl'>5 Day Forecast</h2>
         </div>
