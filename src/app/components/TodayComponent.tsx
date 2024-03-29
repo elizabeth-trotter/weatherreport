@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
@@ -9,7 +7,7 @@ import { IOverview, IToday } from '@/Interfaces/Interfaces'
 const TodayComponent = (props: IToday) => {
 
   return (
-    <div className='ps-2 lg:ps-0 lg:pt-20 w-full lg:w-1/2'>
+    <div className='ps-0 md:ps-2 lg:ps-0 lg:pt-20 w-full lg:w-1/2'>
       <div className='bgBlueBody rounded-md'>
         <div className='h-14 p-6'>
           <h2 className='font-montserrat text-center font-semibold text-xl'>Today</h2>

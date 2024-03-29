@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useEffect, useState, useSyncExternalStore } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
@@ -33,7 +31,7 @@ const OverviewComponent = (props: IOverview) => {
     });
 
     return (
-        <div className='pt-20 ps-2 w-full lg:w-1/2'>
+        <div className='pt-20 ps-0 md:ps-2 w-full lg:w-1/2'>
             <div className='bg-navyblue flex justify-between items-center rounded-t-md h-14 p-4'>
                 <h2 className='font-montserrat font-semibold text-2xl'>{props.city}, {props.state}</h2>
                 <button onClick={handleClickHeart} className='hover:text-peach'>

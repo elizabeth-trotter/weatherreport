@@ -1,5 +1,3 @@
-'use client'
-
 import { INav } from '@/Interfaces/Interfaces'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,7 +12,7 @@ const NavComponent = (props: INav) => {
     };
 
     return (
-        <div className="bg-navyblue min-h-lvh py-7 px-10">
+        <div className="bg-navyblue min-h-lvh py-7 px-10 rounded-none sm:rounded-md md:rounded-none">
             <div className='flex justify-end'>
                 <img src="./logo.png" alt="weather logo" className='w-1/5' />
             </div>

@@ -166,7 +166,7 @@ export default function Home() {
   }, [weatherData, hourlyWeatherData]);
 
   return (
-    <main className='backgroundDay min-h-lvh'>
+    <main className='backgroundDay min-h-screen'>
       <div className="grid md:grid-cols-60/40 lg:grid-cols-73/27">
         <div className='pt-16 px-12 pb-10'>
           <h1 className='font-montserrat text-4xl font-bold pb-4'>U.S. Weather Report</h1>
@@ -205,16 +205,17 @@ export default function Home() {
               />
             }
           </div>
-
         </div>
 
-        <NavComponent
-          value={searchValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
-          onSearch={handleSearch}
-          onKeyDown={handleInputKeyDown}
-          onRecentCityClick={handleRecentCityClick}
-        />
+        <div className="px-0 sm:px-12 md:px-0 min-h-full">
+          <NavComponent
+            value={searchValue}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
+            onSearch={handleSearch}
+            onKeyDown={handleInputKeyDown}
+            onRecentCityClick={handleRecentCityClick}
+          />
+        </div>
 
       </div>
     </main>

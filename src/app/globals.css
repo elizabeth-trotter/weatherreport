@@ -22,11 +22,8 @@
 
 .bgTransparent {
   background-color: rgba(34, 31, 31, 0.127);
-  /* Adjust the alpha value for transparency (0 is fully transparent, 1 is fully opaque) */
   backdrop-filter: blur(10px);
-  /* Adjust the blur radius as needed */
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-  /* Apply drop shadow to bottom and right sides */
 }
 
 .bgBlueBody {
@@ -61,11 +58,13 @@
   border: none;
 }
 
-/* .searchBtnStyle:hover {
-  background-color: #EDA169;
-  color: #FFFFFF;
-} */
-
 .navHeaderColor {
   color: rgba(255, 255, 255, 0.856);
+}
+
+.forecast-scroll-container {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow-x: auto;
 }
