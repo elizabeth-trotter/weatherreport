@@ -36,6 +36,10 @@ export default function Home() {
     }
   };
 
+  const handleRecentCityClick = (location: string) => {
+    setCitySearch(location);
+  };
+
   // Search Criteria - API Req. Inputs
   const [lat, setLat] = useState<number>(37.961632);
   const [long, setLong] = useState<number>(-121.275604);
@@ -102,10 +106,8 @@ export default function Home() {
     };
     getData();
 
-    const recents = getRecentLocalStorage();
-
     if (locationData) {
-        saveRecentToLocalStorage(`${locationData[0].name}, ${locationData[0].state}`);
+      saveRecentToLocalStorage(`${locationData[0].name}, ${locationData[0].state ? stateAb[locationData[0].state] : ''}`);
     }
   }, [citySearch]);
 
@@ -147,17 +149,17 @@ export default function Home() {
     if (weatherData && hourlyWeatherData) {
       const dateArray = getDates(weatherData);
       const setDateSetter = [setDateDayOne, setDateDayTwo, setDateDayThree, setDateDayFour, setDateDayFive];
-      
+
       const futureArr = hourlyForecast(hourlyWeatherData, dateArray);
       const setIconSetter = [setDayOneIcon, setDayTwoIcon, setDayThreeIcon, setDayFourIcon, setDayFiveIcon];
       const setHighSetter = [setDayOneHigh, setDayTwoHigh, setDayThreeHigh, setDayFourHigh, setDayFiveHigh];
       const setLowSetter = [setDayOneLow, setDayTwoLow, setDayThreeLow, setDayFourLow, setDayFiveLow];
 
       for (let i = 0; i < setDateSetter.length; i++) {
-          setDateSetter[i](formatDate(dateArray[i]));
-          setIconSetter[i](IconSwitch(futureArr[i]));
-          setHighSetter[i](futureArr[i + 5]);
-          setLowSetter[i](futureArr[i + 10]);
+        setDateSetter[i](formatDate(dateArray[i]));
+        setIconSetter[i](IconSwitch(futureArr[i]));
+        setHighSetter[i](futureArr[i + 5]);
+        setLowSetter[i](futureArr[i + 10]);
       }
 
     }
@@ -184,17 +186,17 @@ export default function Home() {
             }
 
             {
-              weatherData && <TodayComponent 
-                morningIcon={morningIcon} morningTemp={morningTemp} 
-                noonIcon={noonIcon} noonTemp={noonTemp} 
-                nightIcon={nightIcon} nightTemp={nightTemp} 
+              weatherData && <TodayComponent
+                morningIcon={morningIcon} morningTemp={morningTemp}
+                noonIcon={noonIcon} noonTemp={noonTemp}
+                nightIcon={nightIcon} nightTemp={nightTemp}
               />
             }
           </div>
 
           <div>
             {
-              weatherData && <FiveDayComponent 
+              weatherData && <FiveDayComponent
                 dateDayOne={dateDayOne} dayOneIcon={dayOneIcon} dayOneHigh={dayOneHigh} dayOneLow={dayOneLow}
                 dateDayTwo={dateDayTwo} dayTwoIcon={dayTwoIcon} dayTwoHigh={dayTwoHigh} dayTwoLow={dayTwoLow}
                 dateDayThree={dateDayThree} dayThreeIcon={dayThreeIcon} dayThreeHigh={dayThreeHigh} dayThreeLow={dayThreeLow}
@@ -211,6 +213,7 @@ export default function Home() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
           onSearch={handleSearch}
           onKeyDown={handleInputKeyDown}
+          onRecentCityClick={handleRecentCityClick}
         />
 
       </div>

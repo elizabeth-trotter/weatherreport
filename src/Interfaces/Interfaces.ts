@@ -94,6 +94,7 @@ export interface INav {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
     onSearch: () => void,
     onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void; 
+    onRecentCityClick: (location: string) => void;
 }
 
 interface Location {

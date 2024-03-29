@@ -30,26 +30,31 @@ const removeFavoriteFromLocalStorage = (location: string) => {
 };
 
 const saveRecentToLocalStorage = (location: string) => {
-
     let recents = getRecentLocalStorage();
 
-    if (recents.includes(location)) {
-        let indexDuplicate = recents.indexOf(location);
-        if (indexDuplicate !== 2) {
-            recents.splice(indexDuplicate, 1);
-            recents.push(location);
-            localStorage.setItem("Recents", JSON.stringify(recents));
-        }
+    // Check if location already exists in recents array
+    const index = recents.indexOf(location);
+
+    // If location exists and it's not already at index 0
+    if (index !== -1 && index !== 0) {
+        // Remove existing entry and add it to the beginning of the array
+        recents.splice(index, 1);
+        recents.unshift(location);
+    } else if (index === 0) {
+        // If location is already at index 0, no need to change anything
+        return;
     } else {
-        if (recents.length > 2) {
-            recents.shift();
-            recents.push(location);
-            localStorage.setItem("Recents", JSON.stringify(recents));
-        } else {
-            recents.push(location);
-            localStorage.setItem("Recents", JSON.stringify(recents));
+        // If location is not in the array or is already at index 0
+
+        // Remove the last element if the array length exceeds 3
+        if (recents.length >= 3) {
+            recents.pop();
         }
+        // Add location to the beginning of the array
+        recents.unshift(location);
     }
+
+    localStorage.setItem("Recents", JSON.stringify(recents));
 };
 
 const getRecentLocalStorage = () => {

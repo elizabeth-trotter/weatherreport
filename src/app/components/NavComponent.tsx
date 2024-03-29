@@ -6,7 +6,10 @@ import { getRecentLocalStorage } from '../utils/LocalStorage'
 import RecentsComponent from './RecentsComponent'
 
 const NavComponent = (props: INav) => {
-    
+    const handleRecentCityClick = (location: string) => {
+        props.onRecentCityClick(location);
+    };
+
     return (
         <div className="bg-navyblue min-h-lvh py-7 px-10">
             <div className='flex justify-end'>
@@ -37,7 +40,7 @@ const NavComponent = (props: INav) => {
                         <p className="pt-3 font-montserrat text-md font-normal navHeaderColor">Recents</p>
                         <div className="pt-3 pb-5">
                             <div>
-                                <RecentsComponent />
+                                <RecentsComponent onRecentCityClick={handleRecentCityClick}/>
                             </div>
                         </div>
 

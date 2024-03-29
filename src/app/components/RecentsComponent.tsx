@@ -3,7 +3,7 @@ import { getRecentLocalStorage, removeRecentFromLocalStorage } from '../utils/Lo
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 
-const RecentsComponent = () => {
+const RecentsComponent = ({ onRecentCityClick }: { onRecentCityClick: (location: string) => void }) => {
     const [recentsArray, setRecentsArray] = useState(getRecentLocalStorage());
 
     const removeRecent = (locationToRemove: string) => {
@@ -22,10 +22,10 @@ const RecentsComponent = () => {
             {recentsArray.length > 0 ? (
                 recentsArray.map((location: string, index: number) => (
                     <div key={index} className={`flex items-center justify-between py-4 ${index === recentsArray.length - 1 ? '' : 'mb-1 border-b border-gray-700'} `}>
-                        <p className="font-oswald font-light text-lg cursor-pointer hover:text-peach" onClick={() => removeRecent(location)}>
+                        <p className="font-oswald font-light text-lg cursor-pointer hover:text-peach" onClick={() => onRecentCityClick(location)}>
                             {location}
                         </p>
-                        <FontAwesomeIcon icon={faMinusCircle} className="cursor-pointer text-xl text-white hover:text-peach" onClick={() => removeRecent(location)} />
+                        <FontAwesomeIcon icon={faMinusCircle} className="cursor-pointer text-xl text-white hover:text-peach" onClick={() => removeRecent(location)}/>
                     </div>
                 ))
             ) : (
