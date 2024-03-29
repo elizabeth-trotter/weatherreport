@@ -26,7 +26,7 @@ The primary objective of this project was to rebuild a weather application with 
 
 ## Website Preview
 
-![alt text](./preview.png)
+![Weather application preview](./public/preview.png)
 <p align="right">Figure 1: Snapshot of rebuilt U.S. Weather Report</p>
 
 
