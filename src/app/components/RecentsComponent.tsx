@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 
 const RecentsComponent = ({ onRecentCityClick }: { onRecentCityClick: (location: string) => void }) => {
-    const [recentsArray, setRecentsArray] = useState(getRecentLocalStorage());
+    const [recentsArray, setRecentsArray] = useState<string[]>([]);
 
     const removeRecent = (locationToRemove: string) => {
         removeRecentFromLocalStorage(locationToRemove);
