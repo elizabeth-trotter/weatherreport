@@ -24,16 +24,16 @@ The primary objective of this project was to rebuild a weather application with 
 ---
 
 
-## Website Preview
+## Desktop Preview
 
-![Weather application preview](./public/preview.png)
+![Weather application preview](./public/desktop-preview.png)
 <p align="right">Figure 1: Snapshot of rebuilt U.S. Weather Report</p>
 
 
 > ### Peer Review:
 > 
-> **Name:** Michael Heckerman
-> **Date/ Time:** 3/29/2024 10:46am
+> **Name:** Michael Heckerman | **Date/ Time:** 3/29/2024 10:46am
+> 
 > **Comment(s):** Downloaded the code to make sure it worked, it did. Tested the site on desktop where it worked fine. When I tested it on my phone it didn't fit properly, but it did function as intended other than the sizing issues.
 
 **Issue(s) Resolved**:
