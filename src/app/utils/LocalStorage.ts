@@ -1,3 +1,5 @@
+'use client'
+
 const saveFavoriteToLocalStorage = (location: string) => {
 
     let favorites = getFavoriteLocalStorage();
