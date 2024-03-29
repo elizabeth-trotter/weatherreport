@@ -31,7 +31,7 @@ The primary objective of this project was to rebuild a weather application with 
 > **Comment(s):** Downloaded the code to make sure it worked, it did. Tested the site on desktop where it worked fine. When I tested it on my phone it didn't fit properly, but it did function as intended other than the sizing issues.
 
 **Issue(s) Resolved**:
-- [] Responsiveness for mobile
+- [x] Responsiveness for mobile fix 3/29/24 1:44pm
 
 
 ---
