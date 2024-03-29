@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { getRecentLocalStorage } from '../utils/LocalStorage'
 import RecentsComponent from './RecentsComponent'
+import FavoritesComponent from './FavoritesComponent'
 
 const NavComponent = (props: INav) => {
     const handleRecentCityClick = (location: string) => {
@@ -48,9 +49,9 @@ const NavComponent = (props: INav) => {
 
                         <hr/>
                         <p className="pt-3 font-montserrat text-md font-normal navHeaderColor">Favorites</p>
-                        <div className="py-3 overflow-y-auto">
+                        <div className="pt-3 pb-5 max-h-96 overflow-y-auto">
                             <div>
-
+                                <FavoritesComponent onRecentCityClick={handleRecentCityClick}/>
                             </div>
                         </div>
                         <hr/>

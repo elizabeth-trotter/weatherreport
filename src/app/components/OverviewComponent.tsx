@@ -36,8 +36,8 @@ const OverviewComponent = (props: IOverview) => {
         <div className='pt-20 ps-2 w-full lg:w-1/2'>
             <div className='bg-navyblue flex justify-between items-center rounded-t-md h-14 p-4'>
                 <h2 className='font-montserrat font-semibold text-2xl'>{props.city}, {props.state}</h2>
-                <button onClick={handleClickHeart}>
-                    <FontAwesomeIcon icon={heartIcon} className='text-xl' />
+                <button onClick={handleClickHeart} className='hover:text-peach'>
+                    <FontAwesomeIcon icon={heartIcon} className='text-2xl' />
                 </button>
             </div>
 
