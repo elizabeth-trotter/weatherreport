@@ -41,8 +41,8 @@ const OverviewComponent = (props: IOverview) => {
 
             <div className='bgTransparent rounded-b-md 2xl:py-4'>
                 <div className='flex justify-evenly items-center py-14 2xl:py-16 px-2'>
-                    <FontAwesomeIcon icon={props.currentIcon} className='text-7xl' />
-                    <p className='font-montserrat text-7xl '>{props.currentTemp} °F</p>
+                    <FontAwesomeIcon icon={props.currentIcon} className='text-5xl sm:text-7xl' />
+                    <p className='font-montserrat text-5xl sm:text-7xl'>{props.currentTemp} °F</p>
                 </div>
 
                 <div className='flex justify-between items-center pb-5 px-5'>

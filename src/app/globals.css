@@ -61,10 +61,3 @@
 .navHeaderColor {
   color: rgba(255, 255, 255, 0.856);
 }
-
-.forecast-scroll-container {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  overflow-x: auto;
-}

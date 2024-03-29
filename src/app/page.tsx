@@ -207,7 +207,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="px-0 sm:px-12 md:px-0 min-h-full">
+        <div className="px-0 sm:px-12 md:px-0 min-h-svh md:min-h-lvh">
           <NavComponent
             value={searchValue}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
