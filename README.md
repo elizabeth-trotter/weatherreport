@@ -1,7 +1,11 @@
 # U.S. Weather Report Rebuild &ensp;<a href="https://usweatherreport.vercel.app/">![Website](https://img.shields.io/website?url=https%3A%2F%2Fusweatherreport.vercel.app%2F&up_message=ONLINE&up_color=355E3B&down_message=OFFLINE&down_color=8B0000&style=for-the-badge&logo=vercel)</a>
 **Name:** Elizabeth Trotter
 
-**Project Description:** The objective of this project was to rebuild a weather application with `Next.js`, `TypeScript`, and `TailwindCSS`. Data retrieval was accomplished through the `OpenWeatherAPI`. Extensive data manipulation was necessary via helper functions to align with the specifications outlined in the prototype design. There were many challenges to overcome as it was the `first major project` in which I leveraged `Next.js`. 
+**Project Description:** 
+
+- The objective of this project was to rebuild a weather application with `Next.js`, `TypeScript`, and `TailwindCSS`. This project constituted the third phase of the timeline outlined below. :three:
+
+- Data retrieval was accomplished through the `OpenWeatherAPI`. Extensive data manipulation was necessary via helper functions to align with the specifications outlined in the prototype design. There were many challenges to overcome as it was the `first major project` in which I leveraged `Next.js`. :sparkles:
 
 
 ## Timeline
