@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useState } from 'react';
 import { getRecentLocalStorage, removeRecentFromLocalStorage } from '../utils/LocalStorage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

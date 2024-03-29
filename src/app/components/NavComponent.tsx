@@ -1,3 +1,5 @@
+'use client'
+
 import { INav } from '@/Interfaces/Interfaces'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
