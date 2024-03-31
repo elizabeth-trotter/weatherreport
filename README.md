@@ -18,7 +18,7 @@ The primary objective of this project was to rebuild a weather application with 
 <p align="right">Table 1: Revised project timeline updated March 29, 2024 to include Rebuild Sprint</p>
 
 > [!NOTE]
-> You can find the **first version** of this project by clicking [**here**](https://github.com/et120/weatherapplication) :point_left:
+> You can find the original **vanilla JavaScript version** of this project by clicking [**here**](https://github.com/et120/weatherapplication) :point_left:
 
 
 ---

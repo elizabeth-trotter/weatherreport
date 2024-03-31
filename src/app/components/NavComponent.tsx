@@ -1,8 +1,7 @@
+import React from 'react'
 import { INav } from '@/Interfaces/Interfaces'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
-import { getRecentLocalStorage } from '../utils/LocalStorage'
 import RecentsComponent from './RecentsComponent'
 import FavoritesComponent from './FavoritesComponent'
 

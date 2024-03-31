@@ -1,8 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as faSolidHeart, faMagnifyingGlass, faCloud, faSun } from "@fortawesome/free-solid-svg-icons";
-import { IOverview, IToday } from '@/Interfaces/Interfaces'
+import { IToday } from '@/Interfaces/Interfaces'
 
 const TodayComponent = (props: IToday) => {
 

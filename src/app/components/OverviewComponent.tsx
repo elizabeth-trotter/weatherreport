@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useSyncExternalStore } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as faSolidHeart, faMagnifyingGlass, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faSolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { IOverview } from '@/Interfaces/Interfaces';
 import { getFavoriteLocalStorage, removeFavoriteFromLocalStorage, saveFavoriteToLocalStorage } from '../utils/LocalStorage';
 

@@ -11,7 +11,7 @@ import { stateAb } from "./utils/StateConvert";
 import { formatDate, getDates, getTodayForecast, hourlyForecast } from "./utils/HourlyFunction";
 import { faCloud, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import FiveDayComponent from "./components/FiveDayComponent";
-import { getRecentLocalStorage, saveRecentToLocalStorage } from "./utils/LocalStorage";
+import { saveRecentToLocalStorage } from "./utils/LocalStorage";
 
 
 export default function Home() {
@@ -24,7 +24,6 @@ export default function Home() {
   const handleSearch = () => {
     if (searchValue) {
       setCitySearch(searchValue);
-      console.log('Search button clicked for: ' + searchValue);
     }
   };
 
@@ -132,7 +131,7 @@ export default function Home() {
       let estimatedTodayBasedOnTmrw = new Date(todayDateTime.setHours(todayDateTime.getHours() + (24)));
 
       let todayForecastArr = getTodayForecast(hourlyWeatherData, estimatedTodayBasedOnTmrw);
-      console.log('forcast array on page.tsx ' + todayForecastArr)
+      
       if (todayForecastArr) {
         setMorningIcon(IconSwitch(todayForecastArr[0]));
         setMorningTemp(todayForecastArr[1]);
