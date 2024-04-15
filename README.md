@@ -3,9 +3,9 @@
 
 **Project Description:** 
 
-The primary objective of this project was to rebuild a weather application with `Next.js`, `TypeScript`, and `TailwindCSS`. This project constituted the third phase of the timeline outlined below.
+The primary objective of this project was to rebuild my former weather application with `Next.js`, `TypeScript`, and `TailwindCSS`. This project constituted the third sprint of the timeline outlined below.
 
-- Data retrieval was accomplished through the `OpenWeatherAPI`. Extensive data manipulation was necessary via helper functions to align with the specifications outlined in the prototype design. There were many challenges to overcome as it was the `first major project` in which I leveraged `Next.js`.
+- Data retrieval was accomplished through the `OpenWeatherAPI`. Extensive data manipulation was necessary via helper functions to align with the specifications outlined in the prototype design. There were many challenges to overcome as it was the first major project in which I leveraged `Next.js`.
 
 
 ## Timeline

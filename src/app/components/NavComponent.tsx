@@ -29,7 +29,7 @@ const NavComponent = (props: INav) => {
                             onKeyDown={props.onKeyDown}
                         />
                         <button className="searchBtnStyle" type="button" onClick={props.onSearch}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} className='pe-2' />
+                            <FontAwesomeIcon icon={faMagnifyingGlass} className='pe-2 hover:text-peach' />
                         </button>
                     </div>
                 </div>

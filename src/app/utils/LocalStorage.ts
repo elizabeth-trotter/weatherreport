@@ -47,7 +47,6 @@ const saveRecentToLocalStorage = (location: string) => {
             recents.unshift(location);
         } else if (index === 0) {
             // If location is already at index 0, no need to change anything
-            return;
         } else {
             // If location is not in the array or is already at index 0
 

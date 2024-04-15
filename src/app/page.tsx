@@ -15,8 +15,8 @@ import { saveRecentToLocalStorage } from "./utils/LocalStorage";
 
 
 export default function Home() {
-  const [date, setDate] = useState<string>('March 25, 2024');
-  const [time, setTime] = useState<string>('2:20 PM PST');
+  const [date, setDate] = useState<string>('');
+  const [time, setTime] = useState<string>('');
 
   const [searchValue, setSearchValue] = useState<string>('');
   const [citySearch, setCitySearch] = useState<string>('');
@@ -66,25 +66,38 @@ export default function Home() {
   // User Location Request
   useEffect(() => {
     const success = (position: any) => {
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      setLat(latitude);
+      setLong(longitude);
       const getData = async () => {
-        const data = await getCurrentWeather(lat, long, units)
+        const data = await getCurrentWeather(latitude, longitude, units)
         setWeatherData(data);
-        const locationData = await getLocationReverseGeo(lat, long);
+        const locationData = await getLocationReverseGeo(latitude, longitude);
         setLocationData(locationData);
-        const hourlyData = await getHourlyWeather(lat, long, units);
+        const hourlyData = await getHourlyWeather(latitude, longitude, units);
         setHourlyWeatherData(hourlyData);
       };
       getData();
     };
 
-    const errorFunc = () => {
-      setLat(37.961632);
-      setLong(-121.275604);
-    };
+    // const errorFunc = () => {
+    //   const latitude = 37.961632;
+    //   const longitude = -121.275604;
+    //   setLat(latitude);
+    //   setLong(longitude);
+    //   const getData = async () => {
+    //     const data = await getCurrentWeather(latitude, longitude, units)
+    //     setWeatherData(data);
+    //     const locationData = await getLocationReverseGeo(latitude, longitude);
+    //     setLocationData(locationData);
+    //     const hourlyData = await getHourlyWeather(latitude, longitude, units);
+    //     setHourlyWeatherData(hourlyData);
+    //   };
+    //   getData();
+    // };
 
-    navigator.geolocation.getCurrentPosition(success, errorFunc);
+    navigator.geolocation.getCurrentPosition(success);
   }, []);
 
   // Date & Time
