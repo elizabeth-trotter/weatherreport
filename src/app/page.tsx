@@ -13,7 +13,6 @@ import { faCloud, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import FiveDayComponent from "./components/FiveDayComponent";
 import { saveRecentToLocalStorage } from "./utils/LocalStorage";
 
-
 export default function Home() {
   const [date, setDate] = useState<string>('');
   const [time, setTime] = useState<string>('');
@@ -80,22 +79,6 @@ export default function Home() {
       };
       getData();
     };
-
-    // const errorFunc = () => {
-    //   const latitude = 37.961632;
-    //   const longitude = -121.275604;
-    //   setLat(latitude);
-    //   setLong(longitude);
-    //   const getData = async () => {
-    //     const data = await getCurrentWeather(latitude, longitude, units)
-    //     setWeatherData(data);
-    //     const locationData = await getLocationReverseGeo(latitude, longitude);
-    //     setLocationData(locationData);
-    //     const hourlyData = await getHourlyWeather(latitude, longitude, units);
-    //     setHourlyWeatherData(hourlyData);
-    //   };
-    //   getData();
-    // };
 
     navigator.geolocation.getCurrentPosition(success);
   }, []);
