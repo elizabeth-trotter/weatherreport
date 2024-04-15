@@ -44,4 +44,4 @@ The primary objective of this project was to rebuild my former weather applicati
 
 
 ## See nextjs-setup.md for the download + install
-- Project will need api key
+- Project will need an api key from [OpenWeatherAPI](https://openweathermap.org/api)
